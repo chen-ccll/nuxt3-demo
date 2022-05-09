@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.2"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "@wangeditor/editor": "^5.0.1",
+    "@wangeditor/editor-for-vue": "^5.1.11",
+    "ant-design-vue": "^3.2.3",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0"
+  }
+}
