@@ -9,7 +9,7 @@
               动态
             </span>
           </template>
-          <!-- <div style="border: 1px solid #ccc">
+          <div style="border: 1px solid #ccc">
             <Toolbar
               style="border-bottom: 1px solid #ccc"
               :editor="editorRef"
@@ -23,7 +23,7 @@
               :mode="mode"
               @onCreated="handleCreated"
             />
-          </div> -->
+          </div>
         </a-tab-pane>
         <a-tab-pane key="2">
           <template #tab>
@@ -53,26 +53,41 @@ import {
   EditOutlined,
   QuestionOutlined,
 } from "@ant-design/icons-vue";
-// import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
+import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 definePageMeta({
   layout: "custom",
 });
 const activeKey = ref("1");
+const editorRef = shallowRef();
 
+const mode = "default";
+// 内容 HTML
+const valueHtml = ref("<p>hello</p>");
+
+// 模拟 ajax 异步获取内容
+onMounted(() => {
+  setTimeout(() => {
+    valueHtml.value = "<p>模拟 Ajax 异步设置内容</p>";
+  }, 1500);
+});
+
+const toolbarConfig = {};
+const editorConfig = { placeholder: "请输入内容..." };
+
+// 组件销毁时，也及时销毁编辑器
+onBeforeUnmount(() => {
+  const editor = editorRef.value;
+  if (editor == null) return;
+  editor.destroy();
+});
+
+const handleCreated = (editor) => {
+  editorRef.value = editor; // 记录 editor 实例，重要！
+};
 useHead({
   titleTemplate: `MoneyBoxs-社区`,
 });
 </script>
-
-<script>
-// import "@wangeditor/editor/dist/css/style.css"; // 引入 css
-
-// export default {
-//   components: { Editor, Toolbar },
-//   setup() {},
-// };
-</script>
-
 <style lang="less" scoped>
 .ant-tabs-tab .anticon {
   margin: 0;
